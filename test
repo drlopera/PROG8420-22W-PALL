@@ -1,0 +1,65 @@
+
+
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Say something!")
+        audio = r.listen(source)
+
+
+
+
+def principal_menu():
+    v_loop = 'Y'
+    while v_loop == 'Y':
+        ch = input('Please enter an option : A - Administration | P - Patient | D - Doctor | X - exit : ')
+        if ch not in v_valid_entries:
+            print('<ERROR> Please type A - Administration | P - Patient | D - Doctor | X - exit :  <ERROR>')
+            print()
+        elif ch == 'A':
+            print('...Welcome to the Administration Menu')
+            print()
+            v_login = input('Please write you email address : ')
+            if f_email_validation(v_login):
+                print('<ERROR> You wrote wrong email')
+            else:
+                    v_data_dict['LOGIN'] = v_login
+                    #v_data_dict['LOGIN'] = f_email_validation(input('Login? '))
+                    v_data_dict['USER_ID'] = f_hasher_pk(v_data_dict['LOGIN'])
+                    v_data_dict['CRYPTOGRAPHIC_PASSWORD'] = f_crypto_password(input('Please write your password : '))
+                    v_data_dict['ACCESS_COUNT'] = 0
+                    v_data_dict['CRYPTOGRAPHIC_PASSWORD'] = p_chyper_password(v_data_dict, v_filename_chyper, v_directory,
+                                                                              v_sheet_name)
+                    v_db_connection = sqlite3.connect(v_directory + v_database_name)
+                    v_data_list = ('', '', '', '')
+                    v_new_user = f_insert_data(v_db_connection, v_data_list, v_data_dict)
+                    print('Record created...')
+        elif ch == 'P':
+            print('...Welcome to the Patient Menu')
+            v_login = input('Please write the login to check : ')
+            #v_data_dict['LOGIN'] = f_email_validation(input('Please write the login to check : '))
+            if f_email_validation(v_login):
+                print('<ERROR> You wrote wrong email')
+            else:
+                    v_data_dict['LOGIN'] = v_login
+                    v_data_dict['USER_ID'] = ''
+                    v_data_dict['CRYPTOGRAPHIC_PASSWORD'] = ''
+                    v_data_dict['ACCESS_COUNT'] = 0
+
+                    v_db_connection = sqlite3.connect(v_directory + v_database_name)
+
+                    v_number_logins = f_search_email(v_db_connection, v_data_dict)
+                    if v_number_logins == -1:
+                        print('<ERROR> The Email you wrote does not exist')
+                    else:
+                            #v_number_logins = f_search_email(v_db_connection, v_data_dict)
+                            print('The LOGIN is : ', v_data_dict['LOGIN'], ' The number of ACCESS COUNT : ', v_number_logins)
+                            v_row_updated = f_update_access_count(v_db_connection, v_data_dict)
+                            p_generate_excel(v_db_connection, v_data_dict, v_filename, v_directory)
+        elif ch == 'D':
+            print('...Welcome to the Doctor Menu')
+            v_login = input('Please write the login to check : ')
+        elif ch == 'X':
+            v_loop = 'N'
+            print()
+            print('Chao..')
+            print()
