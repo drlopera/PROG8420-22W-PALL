@@ -43,7 +43,8 @@ v_data_TRANSACTION = {
 }
 
 v_database_name = "finaldatabase.db"
-v_directory = "/Users/pablolopera/Dropbox/PERSONAL_PALL/PERSONAL2022/Conestoga2022/BIGDATAArchitecture/PROG8420-22W-Sec1-Programming for Big Data/Projects/FinalProject/"
+#v_directory = "/Users/pablolopera/Dropbox/PERSONAL_PALL/PERSONAL2022/Conestoga2022/BIGDATAArchitecture/PROG8420-22W-Sec1-Programming for Big Data/Projects/FinalProject/"
+v_directory = ""
 
 
 def f_insert_data(p_table_name,p_connection, p_data_list_insert, p_data_dict_insert):
@@ -56,7 +57,7 @@ def f_insert_data(p_table_name,p_connection, p_data_list_insert, p_data_dict_ins
      return v_data_cursor.lastrowid
 
 def main():
-    v_data_PERSON['PERID'] = 20
+    v_data_PERSON['PERID'] = 23
     v_data_PERSON['NAME'] = "TEST2"
     v_data_PERSON['BIRTHDATE'] = "01/01/2021"
     v_data_PERSON['ADDRESS'] = ""
@@ -77,7 +78,7 @@ def main():
 
     v_new_patient = f_insert_data('PERSONS',v_db_connection, v_data_list, v_data_PERSON)
 
-    v_data_TRANSACTION['TRANSID'] = 20
+    v_data_TRANSACTION['TRANSID'] = 23
     v_data_TRANSACTION['APT_DATE'] = "10/10/2022"
     v_data_TRANSACTION['PRE_COMMENT'] = "pre test"
     v_data_TRANSACTION['POST_COMMENT'] = "post comments"
