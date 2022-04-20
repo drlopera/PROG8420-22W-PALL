@@ -142,9 +142,9 @@ def create_person(p_type):
     else:
         v_data_PERSON['PERID'] = v_PATID
         v_data_PERSON['NAME'] = input('Please write full name: ')
-        v_data_PERSON['BIRTHDATE'] = input('Please write birthdate (DD/MM/YYY) : ')
+        v_data_PERSON['BIRTHDATE'] = input('Please write birthdate (DD/MM/YYYY) : ')
         if(f_date_validation(v_data_PERSON['BIRTHDATE'] )):
-            print('<ERROR> Date Format Is incorrect, the correct is  DD/MM/YYY <ERROR> ')
+            print('<ERROR> Date Format Is incorrect, the correct is  DD/MM/YYYY <ERROR> ')
             print(' ')
         else:
             v_data_PERSON['ADDRESS'] = input('Please write home address: ')
@@ -178,6 +178,7 @@ def create_person(p_type):
 
 def init_data_TRANSACTION():
     v_data_TRANSACTION['TRANSID'] = 0
+    v_data_TRANSACTION['APT_DATE'] = ""
     v_data_TRANSACTION['PERID'] = 0
     v_data_TRANSACTION['PRE_COMMENT'] = ""
     v_data_TRANSACTION['POST_COMMENT'] = ""
@@ -204,9 +205,9 @@ def create_appointment(p_whomadeid):
     v_data_TRANSACTION['FREQUENCE'] = ""
     v_data_TRANSACTION['PERID']  = input('Please write Patient identification: ')
     if f_search_data('PERSONS','PERID',v_data_TRANSACTION['PERID'] ,v_directory,v_database_name) > 0 :
-        v_data_PERSON['APT_DATE'] = input('Please write appoinment date (DD/MM/YYY) : ')
-        if (f_date_validation(v_data_PERSON['APT_DATE'])):
-            print('<ERROR> Date Format Is incorrect, the correct is  DD/MM/YYY <ERROR> ')
+        v_data_TRANSACTION['APT_DATE'] = input('Please write appoinment date (DD/MM/YYYY) : ')
+        if (f_date_validation(v_data_TRANSACTION['APT_DATE'])):
+            print('<ERROR> Date Format Is incorrect, the correct is  DD/MM/YYYY <ERROR> ')
             print(' ')
         else:
             if p_whomadeid==1:
@@ -243,9 +244,9 @@ def create_treatment(p_whomadeid):
     v_data_TRANSACTION['TYPE'] = "T"
     v_data_TRANSACTION['PERID'] = input('Please write Patient identification: ')
     if f_search_data('PERSONS', 'PERID', v_data_TRANSACTION['PERID'], v_directory, v_database_name) > 0:
-        v_data_PERSON['APT_DATE'] = input('Please write initial date for treatment (DD/MM/YYY) : ')
-        if (f_date_validation(v_data_PERSON['APT_DATE'])):
-            print('<ERROR> Date Format Is incorrect, the correct is  DD/MM/YYY <ERROR> ')
+        v_data_TRANSACTION['APT_DATE'] = input('Please write initial date for treatment (DD/MM/YYYY) : ')
+        if (f_date_validation(v_data_TRANSACTION['APT_DATE'])):
+            print('<ERROR> Date Format Is incorrect, the correct is  DD/MM/YYYY <ERROR> ')
             print(' ')
         else:
             if p_whomadeid == 1:
@@ -276,9 +277,9 @@ def patient_menu():
         print('...................')
         print('...PATIENT MENU....')
         print('...................\n')
-        ch = input('Please enter an option : \n 1 - Create Patient \n 2 - Update Patient \n 3 - Patient Appointment \n 4 - Exit \n')
+        ch = input('Please enter an option : \n 1 - Create Patient \n 2 - Update Patient \n 3 - Patient Appointment \n 4 - Previuos Menu \n')
         if ch not in v_valid_entries_patient:
-            print('<ERROR> Please type : 1 - Create Patient | 2 - Update Patient | 3 - Appointment for a Patient |  4 - Exit  <ERROR>')
+            print('<ERROR> Please type : 1 - Create Patient | 2 - Update Patient | 3 - Appointment for a Patient |  4 - Previuos Menu  <ERROR>')
             print()
         elif ch == '1':
             print('====>>>>>>.....Create Patient...')
@@ -304,9 +305,9 @@ def doctor_menu():
         print('...................')
         print('...DOCTOR MENU.....')
         print('...................\n')
-        ch = input('Please enter an option : \n 1 - Doctor Registration \n 2 - Create Patient \n 3 - Patient Appointment \n 4 - Treatments Assignment \n 5 - Exit \n')
+        ch = input('Please enter an option : \n 1 - Doctor Registration \n 2 - Create Patient \n 3 - Patient Appointment \n 4 - Treatments Assignment \n 5 - Previuos Menu \n')
         if ch not in v_valid_entries_doctor:
-            print('<ERROR> Please type : 1 - Doctor Registration | 2 - Create Patient  | 3 - Appointment for a Patient  |  4 - Treatments for a Patient |  5 - Exit  <ERROR>')
+            print('<ERROR> Please type : 1 - Doctor Registration | 2 - Create Patient  | 3 - Appointment for a Patient  |  4 - Treatments for a Patient |  5 - Previuos Menu  <ERROR>')
             print()
         elif ch == '1':
             print('====>>>>>>.....Create Doctor...')
@@ -348,10 +349,10 @@ def admin_menu():
         print('...ADMIN MENU......')
         print('...................\n')
         ch = input(
-            'Please enter an option : \n 1 - Doctor Registration \n 2 - Exercises \n 3 - Users \n 4 - Exit \n')
+            'Please enter an option : \n 1 - Doctor Registration \n 2 - Exercises \n 3 - Users \n 4 - Previuos Menu \n')
         if ch not in v_valid_entries_admin:
             print(
-                '<ERROR> Please type : 1 - Doctor Registration | 2 - Exercises | 3 - Users | 4 - Exit   <ERROR>')
+                '<ERROR> Please type : 1 - Doctor Registration | 2 - Exercises | 3 - Users | 4 - Previuos Menu   <ERROR>')
             print()
         elif ch == '1':
             print('====>>>>>>.....Create Doctor...')
